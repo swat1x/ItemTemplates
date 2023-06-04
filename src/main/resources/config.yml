@@ -1,0 +1,5 @@
+storage:
+  type: YAML # Now available only yaml storage type
+
+yaml-storage:
+  path: "items.yml"

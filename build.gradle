@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group = 'ru.swat1x'
+version = '1.0'
+compileJava.options.encoding = 'UTF-8'
+targetCompatibility = sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenCentral()
+    maven { url = "https://repo.aikar.co/content/groups/aikar/" }
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:plugin-annotations:1.2.3-SNAPSHOT'
+    annotationProcessor 'org.spigotmc:plugin-annotations:1.2.3-SNAPSHOT'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'co.aikar:acf-paper:0.5.1-SNAPSHOT'
+}
+
+shadowJar {
+    relocate 'co.aikar.commands', 'ru.swat1x.itemtemplates.acf'
+    relocate 'co.aikar.locales', 'ru.swat1x.itemtemplates.locales'
+
+    archiveFileName = 'ItemTemplaes-v' + version + ".jar"
+}
+
+build.dependsOn shadowJar
